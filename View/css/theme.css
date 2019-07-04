@@ -1,0 +1,15 @@
+.nav-link{
+    color: #dc3545;
+}
+
+.nav-link:hover{
+    color: #6c757d;
+}
+
+.loader{
+    height: 10%;
+    display: block;
+    margin:auto;
+    align-items: center;
+    justify-content: center;
+}

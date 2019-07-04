@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Auto-Licenciement</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-    <div class="jumbotron jumbotron-fluid bg-primary text-white">
+    <div class="jumbotron jumbotron-fluid bg-danger text-white">
 		<div class="container">
 			<h1 class="display-3">Auto-Licenciement</h1>
 			<p class="lead">Licenciement automatique via formulaire Google-Sheet</p>
@@ -23,14 +15,15 @@
 					<div class="form-group">
 				 		<label for="lienGoogle">Lien du Google-Sheet</label>
 						<input type="text" class="form-control" id="lienGoogle" aria-describedby="lienGoogle" placeholder="Entrer Lien Google-Sheet">
-						<small id="emailHelp" class="form-text text-muted">Exemple : https://docs.google.com/spreadsheets/d/1ApILNRAgpESuTe-SkWKJzF1yTOXzcK4CaUVyy7gTElM/edit#gid=1328458857</small>
+						<small id="emailHelp" class="form-text text-muted">Exemple : https://docs.google.com/spreadsheets/u/1/d/1X7PXfczRZr825KMqJxCxMjpwZo61Qn-bWRhV1G92Fno/edit?usp=drive_web&ouid=105004845914550636560</small>
 					</div>
-					<button type="button" id="btnGenerate" class="btn btn-primary">Commencer</button>
+					<button type="button" id="btnGenerate" class="btn btn-danger">Commencer</button>
 				</form>
 			</div>
 		</div>
 	</div>
 	<hr/>
+	<canvas id="pizza" class="loader"></canvas>
 	<div class="container mb-4 d-none" id="bottom">
 		<div class="alert alert-info" role="alert"><strong id="nbrLicencier"></strong> Personnes à licencier</div>
 		<div class="alert alert-danger" role="alert">Verifier <strong>Nationnalié</strong>, <strong>Departement</strong>, <strong>Date de Naissance</strong> dans le bon format (<strong>JJ/MM/AAAA</strong>)</div>
@@ -163,105 +156,5 @@
 		</div>
 	</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	var jsonEffectifs;
-	var cpt = 0;
-
-	$("#prec").prop("disabled",true);
-
-	function verificationButton(){
-		if(cpt <= 0){
-			$("#prec").prop("disabled",true);
-		}
-		else if(cpt >= jsonEffectifs.length-1){
-			$("#skip").prop("disabled",true);
-		}
-		else if(jsonEffectifs.length-1 == 0){
-			$("#skip").prop("disabled",true);
-		}
-		else{
-			$("#prec").prop("disabled",false);
-			$("#skip").prop("disabled",false);
-		}
-	}
-
-	function completeForm(){
-		if(jsonEffectifs.length <= 0){
-			alert("Aucune personne à licencier dans le tableur");
-			$("#bottom").addClass("d-none");
-		}
-		else{
-			console.log("completeForm function cpt : "+ cpt);
-			completeFormWithElement(jsonEffectifs[cpt]);
-			verificationButton();
-		}
-	}
-
-	function skip(){
-		if(cpt < jsonEffectifs.length-1)
-			cpt ++;
-		console.log("Skip function cpt : "+ cpt);
-		completeFormWithElement(jsonEffectifs[cpt]);
-		verificationButton();
-	}
-
-	function prec(){
-		if(cpt > 0)
-			cpt --;
-		console.log("Skip function cpt : "+ cpt);
-		completeFormWithElement(jsonEffectifs[cpt]);
-		verificationButton();
-	}
-
-	$("#skip").click(function(){
-		skip();
-	});
-
-	$("#prec").click(function(){
-		prec();
-	});
-
-	function completeFormWithElement(array){
-		$('#nom').val(array['Nom']);
-		$('#prenom').val(array['Prenom']);
-		if(array['Sexe'] == 'Un homme'){
-			$('#sexe').val('Homme');
-		}
-		else if(array['Sexe'] == 'Une femme'){
-			$('#sexe').val('Femme');
-		}
-		$('#dateNaissance').val(array['DateNaissance']);
-		$('#lieuNaissance').val(array['LieuNaissance']);
-		$('#adresse').val(array['Adresse']);
-		$('#adresse_suite').val(array['Adresse2']);
-		$('#code_postal').val(array['CodePostal']);
-		$('#ville').val(array['Ville']);
-		$('#telephone').val(array['Telephone']);
-		$('#portable').val(array['Portable']);
-		$('#email').val(array['Mail']);
-	}
-
-	$('#btnGenerate').click(function(event) {
-		var lien = $('#lienGoogle').val();
-		var idGoogleSheet = lien.split('/').slice(-2)[0];
-		// Definir le lien
-		var url = "http://78.249.92.32:5000/sheetID/"+idGoogleSheet;
-		$.get(url, function(data, status){
-            //alert("Status: " + status);
-           	jsonEffectifs = data;
-        })
-		.done(function() {
-			$("#bottom").removeClass("d-none");
-			$("#nbrLicencier").text(jsonEffectifs.length);
-			completeForm();
-		})
-		.fail(function() {
-			alert( "Probleme de connection au Serveur" );
-		})
-	});
-</script>
-</body>
-</html>
+	<?php include 'Control/all/loader.php' ?>
+	<?php include 'Control/licence/JS_licence.php' ?>
