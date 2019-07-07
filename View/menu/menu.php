@@ -4,16 +4,15 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="nav-link" href="?page=licence">Licence Auto</a>
-        <a class="nav-link" href="?page=horaire">Déclaration Horaire</a>
+        <?php
+            if(isset($_SESSION['Auth'])){
+                include 'View/menu/menu_item.php';
+            }
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="?page=login">Login</a>
-                </li>
-            </ul>
-
-        </div>
+            if(!isset($_SESSION['Auth'])){
+                include 'View/menu/menu_item_log.php';
+            }
+        ?>
+        
     </div>
 </nav>

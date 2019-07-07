@@ -13,3 +13,18 @@
     align-items: center;
     justify-content: center;
 }
+
+td.autoSizing{
+    width: 1px;
+    white-space: nowrap;
+}
+
+.editStyle:hover{
+    color:#6c757d !important;
+    cursor: pointer;
+}
+
+.deleteStyle:hover{
+    color:#6c757d !important;
+    cursor: pointer;
+}

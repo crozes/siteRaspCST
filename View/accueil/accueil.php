@@ -4,3 +4,11 @@
         <p class="lead">Outils pour le club de sauvetage toulousain</p>
     </div>
 </div>
+<?php
+    if(isset($_SESSION['Auth'])){
+        include 'View/accueil/accueil_log.php';
+    }
+    else{
+        include 'View/accueil/accueil_nolog.php';
+    }
+?>
