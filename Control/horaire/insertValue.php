@@ -19,6 +19,6 @@
         VALUES (NULL, '".$data["dateDecla"]."', '".$data["horaireDecla"]."', '".$data["comDecla"]."', '".$data["lieuDecla"]."', '".$data["typeDecla"]."', '".$_SESSION['Auth'][0]->idPersonne."');";
 
         $req = $PDO->prepare($sql);
-        $req->execute($sql);
+        $req->execute();
     }
 ?>

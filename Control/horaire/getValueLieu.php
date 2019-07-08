@@ -21,7 +21,7 @@
             FROM LieuInter li";
 
     $req = $PDO->prepare($sql);
-    $req->execute($sql);
+    $req->execute();
     $data = $req->fetchAll();
 
     $json  = json_encode($data);

@@ -19,6 +19,6 @@
         WHERE `Horaire`.`idHoraire` = ".$data["idToDelete"].";";
 
         $req = $PDO->prepare($sql);
-        $req->execute($sql);
+        $req->execute();
     }
 ?>
