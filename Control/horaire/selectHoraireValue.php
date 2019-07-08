@@ -30,7 +30,7 @@
         $req = $PDO->query($sql);
         $data = $req->fetchAll();
 
-        echo $data;
+        print_r($data);
 
         $json  = json_encode($data);
 
