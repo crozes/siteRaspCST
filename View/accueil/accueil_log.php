@@ -6,7 +6,7 @@
         <!--Grid row-->
             <div class="row">
                 <!--Grid column-->
-                <div class="col-md-6 text-white text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                <div class="col-md-6 text-white text-center text-md-left mt-xl-5 mb-5 animated fadeInLeft" >
                         <h1 class="h1-responsive font-weight-bold mt-sm-5">Déclaration de vos horraires </h1>
                         <hr class="hr-light">
                         <h6 class="mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt
@@ -16,7 +16,7 @@
                 </div>
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-md-6 col-xl-5 mt-xl-5 wow fadeInRight" data-wow-delay="0.3s">
+                <div class="col-md-6 col-xl-5 mt-xl-5 animated fadeInRight" >
                         <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png" alt="" class="img-fluid">
                 </div>
                 <!--Grid column-->
@@ -34,12 +34,12 @@
             <!--Grid row-->
             <div class="row">
             <!--Grid column-->
-                <div class="col-md-6 col-xl-5 mt-xl-5 wow fadeInRight" data-wow-delay="0.3s">
+                <div class="col-md-6 col-xl-5 mt-xl-5 animated fadeInRight" >
                     <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png" alt="" class="img-fluid">
                 </div>
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-md-6 text-light text-right text-md-left mt-xl-5 mb-5" data-wow-delay="0.3s">
+                <div class="col-md-6 text-light text-right text-md-left mt-xl-5 mb-5" >
                     <h1 class="h1-responsive font-weight-bold mt-sm-5 text-right">Licences Automatiques</h1>
                     <hr class="hr-light">
                     <h6 class="mb-4 text-light text-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt

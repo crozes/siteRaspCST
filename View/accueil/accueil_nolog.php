@@ -6,7 +6,7 @@
         <!--Grid row-->
             <div class="row">
                 <!--Grid column-->
-                <div class="col-md-6 text-white text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                <div class="col-md-6 text-white text-center text-md-left mt-xl-5 mb-5 animated fadeInLeft" data-wow-delay="0.3s">
                         <h1 class="h1-responsive font-weight-bold mt-sm-5">Loguez-vous</h1>
                         <hr class="hr-light">
                         <h6 class="mb-4 text-white">Vous devez etre loggué afin de pouvoir avoir accés aux differents outils</h6>

@@ -50,6 +50,7 @@
 				Nouveau
 			</button>
 		</div>
+		<canvas id="pizza" class="loader"></canvas>
 		<div class="col-sm-12">
 			<table class="table table-striped">
 				<thead>
@@ -69,6 +70,9 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="col-sm-3 mt-4 mb-4">
+			<a name="" id="" class="btn btn-primary" href="#" role="button">Envoyer</a>
+		</div>
 	</div>
 </div>
 
@@ -86,39 +90,61 @@
         <div class="form-group">
 		  <label for="date">Date<sup>*</sup></label>
 		  <input type="date"
-			class="form-control" name="date_declaration" id="date_declaration" aria-describedby="helpId" placeholder="">
-		  <small id="helpId" class="form-text text-muted">aaaa-mm-dd</small>
+			class="form-control" name="date_declaration" id="date_declaration" aria-describedby="helpId" placeholder="1999/12/25" require>
+		  <small id="helpId" class="form-text text-muted">aaaa/mm/dd</small>
 		</div>
 		<div class="form-group">
-		  <label for="horaireDecla">Horaire<sup>*</sup></label>
+		  <label for="horaire_declaration">Horaire<sup>*</sup></label>
 		  <input type="time"
-			class="form-control" name="horaire_declaration" id="horaireDecla" aria-describedby="helpId" placeholder="">
-		  <small id="helpId" class="form-text text-muted">hh:mm:ss</small>
+			class="form-control" name="horaire_declaration" id="horaire_declaration" aria-describedby="helpId" placeholder="12:00">
+		  <small id="helpId" class="form-text text-muted">hh:mm</small>
 		</div>
 		<div class="form-group">
-		  <label for="lieuDecla">Lieux<sup>*</sup></label>
-		  <select class="form-control" name="lieu_declaration" id="lieuDecla">
+		  <label for="lieu_declaration">Lieux<sup>*</sup></label>
+		  <select class="form-control" name="lieu_declaration" id="lieu_declaration">
 		  </select>
 		  <small id="helpId" class="form-text text-muted">Si "Autres" précisez en commentaire</small>
 		</div>
 		<div class="form-group">
-		  <label for="typeDecla">Type d'action<sup>*</sup></label>
-		  <select class="form-control" name="type_declaration" id="typeDecla">
+		  <label for="type_declaration">Type d'action<sup>*</sup></label>
+		  <select class="form-control" name="type_declaration" id="type_declaration">
 		  </select>
 		</div>
 		<div class="form-group">
-		  <label for="comDecla">Commentaire</label>
-		  <input type="text" class="form-control" name="commentaire_declaration" id="comDecla" aria-describedby="helpId" placeholder="Commentaires">
+		  <label for="commentaire_declaration">Commentaire</label>
+		  <input type="text" class="form-control" name="commentaire_declaration" id="commentaire_declaration" aria-describedby="helpId" placeholder="Commentaires">
 		</div>
 		<small id="helpId" class="form-text text-muted">* champs obligatoires</small>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Valider</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="newDecla()">Valider</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="deleteDecla" tabindex="-1" role="dialog" aria-labelledby="deleteDeclaa" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteDeclaa">Supprimer la déclaration ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Voulez-vous vraiment supprimer la déclaration ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button id="validDeleteButton" type="button" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php include 'Control/all/loader.php' ?>
 
 <script>
 function edit(){
@@ -126,20 +152,36 @@ function edit(){
 }
 
 function deleteHoraire(idTodelete){
-	alert("delete");
+	var obj = {"idToDelete":idTodelete};
+	var jsonValue = JSON.stringify(obj);
+	
+	var url = 'Control/horaire/deleteValue.php';
+	$.ajax({
+		url : url, // La ressource ciblée
+		type : 'POST', // Le type de la requête HTTP.
+		data: jsonValue,
+		dataType : 'text',
+		success : function(json, statut){
+			//alert(json);
+		},
+		error : function(resultat, statut, erreur){
+			alert(resultat);
+		},
+		complete : function(resultat, statut){
+			reloadTable();
+		}
+	});
 }
 
 function completeTypeModalForm(){
 	var url = 'Control/horaire/getValueType.php';
-	//alert('month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val());
 	$.ajax({
 		url : url, // La ressource ciblée
 		type : 'GET', // Le type de la requête HTTP.
 		dataType : 'json',
 		success : function(json, statut){
 			jQuery.each(json, function() {
-				//$('#lieuDecla').append('<option value="'+this.idLieuInter+'">'+this.nomLieuInter+'</option>');
-				$("#typeDecla").append(new Option(this.nomTypeInter, this.idTypeInter));
+				$("#type_declaration").append(new Option(this.nomTypeInter, this.idTypeInter));
 			});
 		},
 		error : function(resultat, statut, erreur){
@@ -153,15 +195,13 @@ function completeTypeModalForm(){
 
 function completeLieuModalForm(){
 	var url = 'Control/horaire/getValueLieu.php';
-	//alert('month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val());
 	$.ajax({
 		url : url, // La ressource ciblée
 		type : 'GET', // Le type de la requête HTTP.
 		dataType : 'json',
 		success : function(json, statut){
 			jQuery.each(json, function() {
-				//$('#lieuDecla').append('<option value="'+this.idLieuInter+'">'+this.nomLieuInter+'</option>');
-				$("#lieuDecla").append(new Option(this.nomLieuInter, this.idLieuInter));
+				$("#lieu_declaration").append(new Option(this.nomLieuInter, this.idLieuInter));
 			});
 		},
 		error : function(resultat, statut, erreur){
@@ -172,6 +212,17 @@ function completeLieuModalForm(){
 		}
 	});
 }
+
+
+$('#deleteDecla').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('idecla') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  //modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('#validDeleteButton').attr("onClick","deleteHoraire("+recipient+")")
+});
 
 function reloadTable(){
 	$('#bodyHoraire').empty();
@@ -197,8 +248,10 @@ function reloadTable(){
 				$("#"+index).append('<td class="autoSizing">'+this.timeHoraire+'</td>');
 				$("#"+index).append('<td class="autoSizing">'+this.nomTypeInter+'</td>');
 				$("#"+index).append('<td>'+this.comHoraire+'</td>');
-				$("#"+index).append('<td class="text-center"><i class="fas fa-edit text-primary editStyle" onClick="edit()"></i></td>');
-				$("#"+index).append('<td class="text-center"><i class="fas fa-trash text-danger deleteStyle" onClick="deleteHoraire('+this.idHoraire+')"></i></td>');
+				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
+				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-trash text-white" ></i></button></td>');
+				
+
 
 				i = i + 1;
 			});
@@ -210,6 +263,35 @@ function reloadTable(){
 	
 		}
     });
+}
+
+function newDecla(){
+	var dateDecla = $("#date_declaration").val();
+	var horaireDecla = $("#horaire_declaration").val()+":00";
+	var lieuDecla = $("#lieu_declaration").val();
+	var typeDecla = $("#type_declaration").val();
+	var comDecla = $("#commentaire_declaration").val();
+	var dateDeclaFormated = dateDecla.replace(/\//g, '-');
+
+	var obj = {"dateDecla":dateDeclaFormated,"horaireDecla":horaireDecla,"lieuDecla":lieuDecla,"typeDecla":typeDecla,"comDecla":comDecla};
+	var jsonValue = JSON.stringify(obj);
+	
+	var url = 'Control/horaire/insertValue.php';
+	$.ajax({
+		url : url, // La ressource ciblée
+		type : 'POST', // Le type de la requête HTTP.
+		data: jsonValue,
+		dataType : 'text',
+		success : function(json, statut){
+			//alert(json);
+		},
+		error : function(resultat, statut, erreur){
+			alert(resultat);
+		},
+		complete : function(resultat, statut){
+			reloadTable();
+		}
+	});
 }
 
 $( document ).ready(function() {
