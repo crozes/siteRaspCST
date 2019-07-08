@@ -26,8 +26,9 @@
             AND `idPersonne` = ".$_SESSION['Auth'][0]->idPersonne."
             ORDER BY dateHoraire;";
 
-    $req = $PDO->prepare($sql);
-    $req->execute();
+    //$req = $PDO->prepare($sql);
+    //$req->execute();
+    $PDO->execute($sql);
     $data = $req->fetchAll();
 
     $json  = json_encode($data);
