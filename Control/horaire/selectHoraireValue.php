@@ -28,7 +28,7 @@
 
     //$req = $PDO->prepare($sql);
     //$req->execute();
-    $PDO->execute($sql);
+    $req = $PDO->query($sql);
     $data = $req->fetchAll();
 
     $json  = json_encode($data);
