@@ -32,6 +32,8 @@
 
     $json  = json_encode($data);
 
+    error_log ($json);
+
     echo $json;
 
     /*foreach($data as $val){

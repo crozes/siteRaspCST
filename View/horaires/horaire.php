@@ -299,7 +299,7 @@ $( document ).ready(function() {
 	$("#inputStateMonth").val(month);
 	$("#inputStateYear").val(year);
 	reloadTable();
-	//completeLieuModalForm();
+	completeLieuModalForm();
 	completeTypeModalForm();
 });
 </script>
