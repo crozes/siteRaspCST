@@ -1,5 +1,12 @@
-<a id="navbarSupportedContent" class="nav-link" href="?page=licence">Licence Auto</a>
-<a id="navbarSupportedContent" class="nav-link" href="?page=horaire">Déclaration Horaire</a>
+<ul class="nav nav-tabs" id="navId">
+    <li class="nav-item">
+        <a id="navbarSupportedContent" class="nav-link" href="?page=licence">Licence Auto</a>
+    </li>
+    <li class="nav-item">
+        <a id="navbarSupportedContent" class="nav-link" href="?page=horaire">Déclaration Horaire</a>
+    </li>
+</ul>
+
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
