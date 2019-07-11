@@ -25,11 +25,11 @@
     $req->execute();
     $data = $req->fetchAll();
 
-    error_log (print_r($data));
+    //error_log (print_r($data));
 
     $json  = json_encode($data);
 
-    error_log ($json);
+    error_log (json_last_error_msg());
 
     echo $json;
 
