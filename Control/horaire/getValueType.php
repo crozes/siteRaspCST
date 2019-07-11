@@ -17,7 +17,7 @@
             ORDER BY ti.nomTypeInter";
 
     $req = $PDO->prepare($sql);
-    $req->execute($d);
+    $req->execute();
     $data = $req->fetchAll();
 
     $json  = json_encode($data);
