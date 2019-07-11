@@ -20,6 +20,7 @@
 
         $req = $PDO->prepare($sql);
         $req->execute($_POST);
+        $data = $req->fetchAll();
 
         $data = '{"status" : "OK" , "msg" : "declaration supprimé"}';
 
