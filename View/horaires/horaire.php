@@ -205,7 +205,7 @@ function completeLieuModalForm(){
 			});
 		},
 		error : function(resultat, statut, erreur){
-			alert(resultat);
+			alert(JSON.stringify(resultat));
 		},
 		complete : function(resultat, statut){
 
@@ -215,25 +215,21 @@ function completeLieuModalForm(){
 
 
 $('#deleteDecla').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipient = button.data('idecla') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('idecla') 
   var modal = $(this)
-  //modal.find('.modal-title').text('New message to ' + recipient)
   modal.find('#validDeleteButton').attr("onClick","deleteHoraire("+recipient+")")
 });
 
 function reloadTable(){
 	$('#bodyHoraire').empty();
 	var url = 'Control/horaire/selectHoraireValue.php';
-	//alert('month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val());
 	$.ajax({
-       url : url, // La ressource ciblée
-       type : 'GET', // Le type de la requête HTTP.
+       url : url,
+       type : 'GET',
        data : 'month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val(),
 	   //dataType : 'json',
-	   success : function(json, statut){ // code_html contient le HTML renvoyé
+	   success : function(json, statut){
 			if (json === undefined || json.length == 0) {
 				$("#bodyHoraire").append('<tr><td colspan="8">Aucun horraire de définit !</td></tr>');
 			}
@@ -276,15 +272,15 @@ function newDecla(){
 	
 	var url = 'Control/horaire/insertValue.php';
 	$.ajax({
-		url : url, // La ressource ciblée
-		type : 'POST', // Le type de la requête HTTP.
+		url : url, 
+		type : 'POST',
 		data: jsonValue,
 		dataType : 'text',
 		success : function(json, statut){
 			//alert(json);
 		},
 		error : function(resultat, statut, erreur){
-			alert(resultat);
+			alert(JSON.stringify(resultat);
 		},
 		complete : function(resultat, statut){
 			reloadTable();
