@@ -16,10 +16,10 @@
         }
 
         $sql="  DELETE FROM `Horaire` 
-        WHERE `Horaire`.`idHoraire` = :idToDelete;";
+        WHERE `Horaire`.`idHoraire` = ".$data['idToDelete'].";";
 
         $req = $PDO->prepare($sql);
-        $req->execute($_POST);
+        $req->execute();
         $data = $req->fetchAll();
 
         $data = '{"status" : "OK" , "msg" : "declaration supprimé"}';
