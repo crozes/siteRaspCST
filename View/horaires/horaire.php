@@ -280,7 +280,7 @@ function newDecla(){
 			//alert(json);
 		},
 		error : function(resultat, statut, erreur){
-			alert(JSON.stringify(resultat);
+			alert(JSON.stringify(resultat));
 		},
 		complete : function(resultat, statut){
 			reloadTable();
