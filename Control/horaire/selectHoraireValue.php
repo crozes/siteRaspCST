@@ -17,14 +17,7 @@
         die('Erreur  : ' . $e->getMessage());
     }
 
-    $sql="  SELECT h.idHoraire, h.dateHoraire, h.timeHoraire, h.comHoraire, li.nomLieuInter, ti.nomTypeInter
-            FROM Horaire h
-            INNER JOIN LieuInter li ON h.idLieuInter = li.idLieuInter
-            INNER JOIN TypeInter ti ON h.idTypeInter = ti.idTypeInter
-            WHERE `dateHoraire` >= '".$year."-".$month."-00 00:00:00' 
-            AND `dateHoraire` <='".$year."-".$month."-31 23:59:59' 
-            AND `idPersonne` = ".$_SESSION['Auth'][0]->idPersonne."
-            ORDER BY dateHoraire;";
+    $sql="  SELECT h.idHoraire, h.dateHoraire, h.timeHoraire, h.comHoraire, li.nomLieuInter, ti.nomTypeInter FROM Horaire h INNER JOIN LieuInter li ON h.idLieuInter = li.idLieuInter INNER JOIN TypeInter ti ON h.idTypeInter = ti.idTypeInter WHERE `dateHoraire` >= '".$year."-".$month."-00 00:00:00' AND `dateHoraire` <='".$year."-".$month."-31 23:59:59' AND `idPersonne` = ".$_SESSION['Auth'][0]->idPersonne." ORDER BY dateHoraire;";
 
     error_log ($sql);
 
