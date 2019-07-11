@@ -165,7 +165,7 @@ function deleteHoraire(idTodelete){
 			//alert(json);
 		},
 		error : function(resultat, statut, erreur){
-			alert(resultat);
+			alert(JSON.stringify(resultat));
 		},
 		complete : function(resultat, statut){
 			reloadTable();
@@ -185,7 +185,7 @@ function completeTypeModalForm(){
 			});
 		},
 		error : function(resultat, statut, erreur){
-			alert(resultat);
+			alert(JSON.stringify(resultat));
 		},
 		complete : function(resultat, statut){
 
@@ -255,7 +255,7 @@ function reloadTable(){
 			});
 		},
 		error : function(resultat, statut, erreur){
-			alert(resultat);
+			alert(JSON.stringify(resultat));
 		},
 		complete : function(resultat, statut){
 	
