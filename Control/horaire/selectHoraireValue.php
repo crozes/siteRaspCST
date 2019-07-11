@@ -1,6 +1,7 @@
 <?php
     session_start();
-    header('Content-type: application/json');
+    header('Content-Type: text/html; charset=utf-8');
+    //header('Content-type: application/json');
 
     if(isset($_GET)){
         $month = $_GET["month"];
