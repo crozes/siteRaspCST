@@ -26,7 +26,7 @@
 
     $json  = json_encode($data);
 
-    error_log (json_last_error_msg());
+    //error_log (json_last_error_msg());
 
     echo $json;
 ?>

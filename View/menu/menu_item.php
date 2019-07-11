@@ -1,5 +1,5 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav nav-tabs" id="navId">
+    <ul class="nav" id="navbarSupportedContent">
         <li class="nav-item">
             <a id="navbarSupportedContent" class="nav-link" href="?page=licence">Licence Auto</a>
         </li>
