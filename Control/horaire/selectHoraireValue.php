@@ -25,7 +25,7 @@
     $req->execute();
     $data = $req->fetchAll();
 
-    error_log ($data);
+    error_log (print_r($data));
 
     $json  = json_encode($data);
 
