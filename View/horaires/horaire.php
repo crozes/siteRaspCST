@@ -251,8 +251,6 @@ function reloadTable(){
 				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
 				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-trash text-white" ></i></button></td>');
 				
-
-
 				i = i + 1;
 			});
 		},
@@ -301,7 +299,7 @@ $( document ).ready(function() {
 	$("#inputStateMonth").val(month);
 	$("#inputStateYear").val(year);
 	reloadTable();
-	completeLieuModalForm();
+	//completeLieuModalForm();
 	completeTypeModalForm();
 });
 </script>
