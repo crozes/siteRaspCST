@@ -178,7 +178,7 @@ function completeTypeModalForm(){
 	$.ajax({
 		url : url, // La ressource ciblée
 		type : 'GET', // Le type de la requête HTTP.
-		dataType : 'json',
+		//dataType : 'json',
 		success : function(json, statut){
 			jQuery.each(json, function() {
 				$("#type_declaration").append(new Option(this.nomTypeInter, this.idTypeInter));
@@ -198,7 +198,7 @@ function completeLieuModalForm(){
 	$.ajax({
 		url : url, // La ressource ciblée
 		type : 'GET', // Le type de la requête HTTP.
-		dataType : 'json',
+		//dataType : 'json',
 		success : function(json, statut){
 			jQuery.each(json, function() {
 				$("#lieu_declaration").append(new Option(this.nomLieuInter, this.idLieuInter));
@@ -232,7 +232,7 @@ function reloadTable(){
        url : url, // La ressource ciblée
        type : 'GET', // Le type de la requête HTTP.
        data : 'month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val(),
-	   dataType : 'json',
+	   //dataType : 'json',
 	   success : function(json, statut){ // code_html contient le HTML renvoyé
 			if (json === undefined || json.length == 0) {
 				$("#bodyHoraire").append('<tr><td colspan="8">Aucun horraire de définit !</td></tr>');
