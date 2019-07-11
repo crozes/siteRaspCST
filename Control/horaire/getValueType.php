@@ -2,11 +2,6 @@
     session_start();
     header('Content-type: application/json');
 
-    if(isset($_GET)){
-        $month = $_GET["month"];
-        $year = $_GET["year"];
-    }
-
     include '../all/log_db.php';
     try{
         $PDO = new PDO('mysql:host='.$DB_serveur.';dbname='.$DB_base.'',$DB_utilisateur,$DB_motdepasse);
@@ -18,10 +13,11 @@
     }
 
     $sql="  SELECT ti.idTypeInter, ti.nomTypeInter
-            FROM TypeInter ti";
+            FROM TypeInter ti
+            ORDER BY ti.nomTypeInter";
 
     $req = $PDO->prepare($sql);
-    $req->execute();
+    $req->execute($d);
     $data = $req->fetchAll();
 
     $json  = json_encode($data);
