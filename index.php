@@ -35,6 +35,9 @@
         else if( $_GET['page']=='login'){
             include 'View/login/login.php';
         }
+        else if($_GET['page']=='signin'){
+            include 'View/signin/signin.php';
+        }
         else{
             header('Location:index.php');
         }
