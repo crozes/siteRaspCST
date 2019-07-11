@@ -145,7 +145,7 @@
 </div>
 
 <?php include 'Control/all/loader.php' ?>
-
+<script src="Control/horaire/DateFormat.js"></script>
 <script>
 function edit(){
 	alert("push");
@@ -236,12 +236,12 @@ function reloadTable(){
 			var i = 1;
 			jQuery.each(json, function() {
 				var index = "horraire"+i;
-
+				var date = $.format.date(this.dateHoraire+" 00:00:00", "E dd MMM yy");
 				$("#bodyHoraire").append('<tr id="'+index+'" ></tr>');
 				$("#"+index).append('<td>'+i+'</td>');
-				$("#"+index).append('<td class="autoSizing">'+this.dateHoraire+'</td>');
+				$("#"+index).append('<td class="autoSizing">'+date+'</td>');
 				$("#"+index).append('<td class="autoSizing">'+this.nomLieuInter+'</td>');
-				$("#"+index).append('<td class="autoSizing">'+this.timeHoraire+'</td>');
+				$("#"+index).append('<td class="autoSizing text-center">'+(this.timeHoraire).slice(0,-3)+'</td>');
 				$("#"+index).append('<td class="autoSizing">'+this.nomTypeInter+'</td>');
 				$("#"+index).append('<td>'+this.comHoraire+'</td>');
 				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
