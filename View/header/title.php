@@ -4,13 +4,13 @@ if(isset($_GET['page'])){
     if($page == "login"){
         echo "<title>Authentification</title>";
     }
-    elseif ($page == "licence"){
+    else if ($page == "licence"){
         echo "<title>Auto-Licenciement</title>";
     }
-    elseif ($page == "horaire"){
+    else if ($page == "horaire"){
         echo "<title>Déclaration horaires</title>";
     }
-    elseif ($page == "accueil"){
+    else if ($page == "accueil"){
         echo "<title>Accueil</title>";
     }
     else{
