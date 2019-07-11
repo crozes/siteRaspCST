@@ -14,25 +14,25 @@
     include 'View/header/header.php';
     include 'View/menu/menu.php';
     
-    if(isset($_GET[page])){
+    if(isset($_GET['page'])){
         if( isset($_SESSION['Auth']) ){
-            if($_GET[page]=='licence'){
+            if($_GET['page']=='licence'){
                 include 'View/licence/Autolicenciement.php';
             }
-            else if($_GET[page]=='horaire'){
+            else if($_GET['page']=='horaire'){
                 include 'View/horaires/horaire.php';
             }
-            else if($_GET[page]=='accueil'){
+            else if($_GET['page']=='accueil'){
                 include 'View/accueil/accueil.php';
             }
-            else if($_GET[page]=='login'){
+            else if($_GET['page']=='login'){
                 include 'View/login/login.php';
             }
-            else if($_GET[page]=='logout'){
+            else if($_GET['page']=='logout'){
                 include 'View/login/logout.php';
             }
         }
-        else if( $_GET[page]=='login'){
+        else if( $_GET['page']=='login'){
             include 'View/login/login.php';
         }
         else{
