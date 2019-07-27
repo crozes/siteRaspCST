@@ -52,7 +52,7 @@
 		</div>
 		<canvas id="pizza" class="loader"></canvas>
 		<div class="col-sm-12">
-			<table class="table table-striped">
+			<table class="table table-striped table-responsive table-bordered">
 				<thead>
 					<tr>
 					<th scope="col">#</th>
@@ -244,8 +244,8 @@ function reloadTable(){
 				$("#"+index).append('<td class="autoSizing text-center">'+(this.timeHoraire).slice(0,-3)+'</td>');
 				$("#"+index).append('<td class="autoSizing">'+this.nomTypeInter+'</td>');
 				$("#"+index).append('<td>'+this.comHoraire+'</td>');
-				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
-				$("#"+index).append('<td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-trash text-white" ></i></button></td>');
+				$("#"+index).append('<td class="align-middle"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
+				$("#"+index).append('<td class="align-middle"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-trash text-white" ></i></button></td>');
 				
 				i = i + 1;
 			});

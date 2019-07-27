@@ -12,7 +12,7 @@
             <a id="navbarSupportedContent" class="nav-link" href="#"><?php echo $_SESSION['Auth'][0]->prenomPersonne." ".$_SESSION['Auth'][0]->nomPersonne; ?></a>
         </li>
         <li>
-            <a id="navbarSupportedContent" class="nav-link" href="?page=logout">Déconnection</a>
+            <a id="navbarSupportedContent" class="nav-link" href="?page=logout">Déconnexion</a>
         </li>
     </ul>
 

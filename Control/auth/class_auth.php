@@ -4,7 +4,7 @@
         $sql = "SELECT p.idPersonne, p.nomPersonne, p.prenomPersonne, p.mailPersonne, p.mdpPersonne, r.valueRole, r.nomRole 
                 FROM Personne p 
                 LEFT JOIN Role r ON p.idRole=r.idRole 
-                WHERE mailPersonne=:login 
+                WHERE mailPersonne=:email 
                 AND mdpPersonne=:password";
         $req = $PDO->prepare($sql);
         $req->execute($d);
