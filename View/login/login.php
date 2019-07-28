@@ -19,7 +19,7 @@
 
 <div class="jumbotron jumbotron-fluid bg-danger text-white">
     <div class="container">
-        <h1 class="display-3">Login</h1>
+        <h1 class="display-3">Connexion</h1>
         <p class="lead">Permet de garder vos donnés lors des prochaines connexions</p>
     </div>
 </div>

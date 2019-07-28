@@ -29,7 +29,7 @@
                         <h1 class="h1-responsive font-weight-bold mt-sm-5">Je crée mon compte</h1>
                         <hr class="hr-light">
                         <h6 class="mb-4 text-white">Page pour créer son compte</h6>
-                        <a name="" id="" class="btn btn-danger" href="?page=signin" role="button">Je m'inscrit !</a> 
+                        <a name="" id="" class="btn btn-danger" href="?page=enregistrer" role="button">Je m'inscrit !</a> 
                 </div>
                 <!--Grid column-->
             </div>

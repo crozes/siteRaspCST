@@ -94,7 +94,7 @@
 		  <small id="helpId" class="form-text text-muted">aaaa/mm/dd</small>
 		</div>
 		<div class="form-group">
-		  <label for="horaire_declaration">Horaire<sup>*</sup></label>
+		  <label for="horaire_declaration">Nombres d'heures travaillées<sup>*</sup></label>
 		  <input type="time"
 			class="form-control" name="horaire_declaration" id="horaire_declaration" aria-describedby="helpId" placeholder="12:00">
 		  <small id="helpId" class="form-text text-muted">hh:mm</small>

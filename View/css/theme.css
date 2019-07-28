@@ -28,3 +28,7 @@ td.autoSizing{
     color:#6c757d !important;
     cursor: pointer;
 }
+
+.valid{
+    border-color: #28a745;
+}
