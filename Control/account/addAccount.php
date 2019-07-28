@@ -16,18 +16,32 @@
             die('Erreur  : ' . $e->getMessage());
         }
 
-        $sql = '    INSERT INTO `Personne` (`idPersonne`, `nomPersonne`, `prenomPersonne`, `mailPersonne`, `mdpPersonne`, `idRole`) 
+        $sql_select = ' SELECT * 
+                        FROM Personne p
+                        WHERE p.nomPersonne = '.$nom.'
+                        AND p.mailPersonne = '.$mail ;
+        
+        $req = $PDO->prepare($sql_select);
+        $req->execute();
+        $data = $req->fetchAll();
+
+        if(count($data)<=0){
+            $sql_insert = '    INSERT INTO `Personne` (`idPersonne`, `nomPersonne`, `prenomPersonne`, `mailPersonne`, `mdpPersonne`, `idRole`) 
                     VALUES (NULL, \''.$nom.'\', \''.$prenom.'\', \''.$mail.'\', \''.$password.'\', \'1\');';
 
-        $req = $PDO->prepare($sql);
-        $req->execute();
-        //$data = $req->fetchAll();
+            $req = $PDO->prepare($sql_insert);
+            $req->execute();
+            //$data = $req->fetchAll();
 
-        if($req>0){
-            return true;
+            if($req>0){
+                return 'OK';
+            }
+            else{
+                return 'Error';
+            }
         }
         else{
-            return false;
+            return 'Exist';
         }
     }
 ?>

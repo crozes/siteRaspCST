@@ -1,5 +1,6 @@
-<?php
-    session_start();
+<?php 
+
+session_start();
     //header('Content-Type: text/html; charset=utf-8');
     header('Content-type: application/json');
 
@@ -18,13 +19,11 @@
         die('Erreur  : ' . $e->getMessage());
     }
 
-    $sql="  SELECT h.idHoraire, h.dateHoraire, h.timeHoraire, h.comHoraire, li.nomLieuInter, ti.nomTypeInter 
-            FROM Horaire h 
-            INNER JOIN LieuInter li ON h.idLieuInter = li.idLieuInter 
-            INNER JOIN TypeInter ti ON h.idTypeInter = ti.idTypeInter 
-            WHERE `dateHoraire` >= '".$year."-".$month."-00 00:00:00' 
-            AND `dateHoraire` <='".$year."-".$month."-31 23:59:59' 
-            AND `idPersonne` = ".$_SESSION['Auth'][0]->idPersonne." ORDER BY dateHoraire;";
+    $sql = "    SELECT  SEC_TO_TIME( SUM( TIME_TO_SEC( `timeHoraire` ) ) ) AS timeSum  
+                FROM Horaire 
+                WHERE idPersonne = ".$_SESSION['Auth'][0]->idPersonne." 
+                AND `dateHoraire` >= '".$year."-".$month."-00 00:00:00'  
+                AND `dateHoraire` <='".$year."-".$month."-31 23:59:59'";
 
     $req = $PDO->prepare($sql);
     $req->execute();

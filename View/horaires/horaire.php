@@ -52,7 +52,7 @@
 		</div>
 		<canvas id="pizza" class="loader"></canvas>
 		<div class="col-sm-12">
-			<table class="table table-striped table-responsive table-bordered">
+			<table class="table table-striped table-responsive table-bordered align-middle">
 				<thead>
 					<tr>
 					<th scope="col">#</th>
@@ -60,9 +60,9 @@
 					<th scope="col">Lieu d'intervention</th>
 					<th scope="col">Horaires</th>
 					<th scope="col">Type d'intervention</th>
-					<th scope="col">Commentaires</th>
+					<th scope="col" style="width:100%">Commentaires</th>
 					<!--<th scope="col">Total heures</th>-->
-					<th scope="col">Mod.</th>
+					<!--<th scope="col">Mod.</th>-->
 					<th scope="col">Sup.</th>
 					</tr>
 				</thead>
@@ -70,13 +70,26 @@
 				</tbody>
 			</table>
 		</div>
+		<!--------  STATS -------->
+		<div class="col-sm-6 col-md-4 col-lg-3">
+			<div class="card bg-light">
+				<div class="card-body">
+					<h5 class="card-title">Total d'heure travaillée :</h5>
+					<h2 class="card-subtitle mb-2" id="totalHeures"></h2>
+				</div>
+			</div>
+		</div>
+
+		<!--------  ENVOYER -------->
+	</div>
+	<div class="row">
 		<div class="col-sm-3 mt-4 mb-4">
-			<a name="" id="" class="btn btn-primary" href="#" role="button">Envoyer</a>
+			<a id="envoyerPDFButton" class="btn btn-primary" href="#" role="button">Envoyer</a>
 		</div>
 	</div>
 </div>
 
-<!-- Modal -->
+<!-- Modal NEW -->
 <div class="modal fade" id="nouvelDecla" tabindex="-1" role="dialog" aria-labelledby="nouvelDeclaration" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -147,9 +160,57 @@
 <?php include 'Control/all/loader.php' ?>
 <script src="Control/horaire/DateFormat.js"></script>
 <script>
-function edit(){
-	alert("push");
+
+function getTotalHourMonth(){
+	var url = 'Control/horaire/getTotalHourMonth.php';
+	$.ajax({
+		url : url, // La ressource ciblée
+		type : 'GET', // Le type de la requête HTTP.
+		data : 'month=' + $("#inputStateMonth").val() + '&year=' + $("#inputStateYear").val(),
+		success : function(json, statut){
+			jQuery.each(json, function() {
+				var timeHour = this.timeSum;
+				if (timeHour == null){
+					$("#totalHeures").text("0h");
+				}
+				else{
+					var formatTime = (timeHour.substring(0, 5).replace(":","h "))+"min";
+					$("#totalHeures").text(formatTime);	
+				}
+			});
+		},
+		error : function(resultat, statut, erreur){
+			alert(JSON.stringify(resultat));
+		},
+		complete : function(resultat, statut){
+
+		}
+	});
 }
+
+/* function edit(){
+	var obj = {"idToGet":idToGet};
+	var jsonValue = JSON.stringify(obj);
+	
+	var url = 'Control/horaire/getAllValue.php';
+	$.ajax({
+		url : url, // La ressource ciblée
+		type : 'POST', // Le type de la requête HTTP.
+		data: jsonValue,
+		dataType : 'text',
+		success : function(json, statut){
+			//alert(json);
+		},
+		error : function(resultat, statut, erreur){
+			alert(JSON.stringify(resultat));
+		},
+		complete : function(resultat, statut){
+			jQuery.each(json, function() {
+				$('#date_declaration').value(this.date);
+			});
+		}
+	});
+} */
 
 function deleteHoraire(idTodelete){
 	var obj = {"idToDelete":idTodelete};
@@ -244,11 +305,12 @@ function reloadTable(){
 				$("#"+index).append('<td class="autoSizing text-center">'+(this.timeHoraire).slice(0,-3)+'</td>');
 				$("#"+index).append('<td class="autoSizing">'+this.nomTypeInter+'</td>');
 				$("#"+index).append('<td>'+this.comHoraire+'</td>');
-				$("#"+index).append('<td class="align-middle"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit()"></i></td>');
+				//$("#"+index).append('<td class="align-middle"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editDecal" data-idecla="'+this.idHoraire+'"><i class="fas fa-edit text-white" onClick="edit('+this.idHoraire+')"></i></td>');
 				$("#"+index).append('<td class="align-middle"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDecla" data-idecla="'+this.idHoraire+'"><i class="fas fa-trash text-white" ></i></button></td>');
 				
 				i = i + 1;
 			});
+			getTotalHourMonth();
 		},
 		error : function(resultat, statut, erreur){
 			alert(JSON.stringify(resultat));

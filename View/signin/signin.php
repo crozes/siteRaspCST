@@ -29,7 +29,7 @@
             $_POST["password"] = strtoupper($_POST["password"]);
             $ret = createAccount($_POST["nom"],$_POST["prenom"],$_POST["email"],$_POST["password"]);
             //$ret = $Auth->create($_POST);
-            if($ret == true){
+            if($ret == 'OK'){
                 //header('Location:index.php?page=accueil');
                 $alert = '  <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <h4 class="alert-heading">Vous êtes enregistré !!!</h4>
@@ -39,6 +39,17 @@
                             </button>
                         </div>';
                 $_POST = "";        
+            }
+            else if($ret == 'Exist'){
+                $alert = '  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Déjà existant !</h4>
+                            <p>L\'adresse mail associée à ce nom existe déjà</p>
+                            <p>Si vous avez perdu votre mot de passe meri de contacter l\'administrateur</p>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>';
+                $_POST = "";     
             }
             else{
                 $alert = '  <div class="alert alert-danger alert-dismissible fade show" role="alert">
