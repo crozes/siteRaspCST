@@ -52,7 +52,7 @@
 		</div>
 		<canvas id="pizza" class="loader"></canvas>
 		<div class="col-sm-12">
-			<table class="table table-striped table-responsive table-bordered align-middle">
+			<table class="table table-striped table-responsive table-bordered align-middle border-danger">
 				<thead>
 					<tr>
 					<th scope="col">#</th>
@@ -72,19 +72,25 @@
 		</div>
 		<!--------  STATS -------->
 		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="card bg-light">
+			<div class="card bg-light border-danger">
 				<div class="card-body">
-					<h5 class="card-title">Total d'heure travaillée :</h5>
-					<h2 class="card-subtitle mb-2" id="totalHeures"></h2>
+				<div class="row">
+					<div class="col-10">Total d'heure travaillée :</div>
+					<div class="col-2"><i class="far fa-clock text-danger" style="font-size : 24px;"></i></div>
+				</div>
+				<div class="row">
+					<div class="col-12"><h2 class="card-subtitle mb-2 text-danger" id="totalHeures"></h2></div>
 				</div>
 			</div>
 		</div>
 
 		<!--------  ENVOYER -------->
 	</div>
-	<div class="row">
-		<div class="col-sm-3 mt-4 mb-4">
-			<a id="envoyerPDFButton" class="btn btn-primary" href="#" role="button">Envoyer</a>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 mt-4 mb-4">
+				<a id="envoyerPDFButton" class="btn btn-danger" href="#" role="button" onclick="genPdf()">Envoyer</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -160,6 +166,10 @@
 <?php include 'Control/all/loader.php' ?>
 <script src="Control/horaire/DateFormat.js"></script>
 <script>
+
+function genPdf(){
+	window.location.href = "Control/horaire/genPDF.php?month=" + $("#inputStateMonth").val() + "&year=" + $("#inputStateYear").val();
+}
 
 function getTotalHourMonth(){
 	var url = 'Control/horaire/getTotalHourMonth.php';
